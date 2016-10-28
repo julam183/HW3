@@ -10,13 +10,41 @@
 # 1) Print the orginal text (150 tokens)
 # 1) Print the new text
 
+import nltk
+from nltk.book import *
 
-access_token = "791422914583298050-m0XgfqVnPO7hJSH2Oe37nuNQxLNnu6X"
-access_token_secret = "8dpUtkGfsRJNdeUl3Ya140EPWYx8tG7mzbArAlD7TIPED"
-consumer_key = "mHkUkEadhj0vb6lJoNRUNem2A"
-consumer_secret = "LIoMZWcPvOtx2E8mrX36ZxlaNWDvTuLyPJZn2MYPlv70wekd7Z"
+text = text2[:150]
+
 
 print("START*******")
 
+
+noun = input("Please enter a noun: ")
+verb = input("Please enter a verb: ")
+adjective = input("Please enter an adjective: ")
+adverb = input("Please enter an adverb: ")
+number = input("Please enter a number: ")
+
+madlib = ''
+original = ''
+for n in range(150):
+    tag = nltk.pos_tag(text[n])
+    print (tag)
+    if tag[0][1] == 'NN':
+        madlib += noun + " "
+    elif tag[0][1] == 'VB':
+        madlib += verb + " "
+    elif tag[0][1] == 'JJ':
+        madlib += adjective + " "
+    elif tag[0][1] == 'RB':
+        madlib += adverb + " "
+    elif tag[0][1] == 'NCD':
+        madlib += number + " "
+    else:
+        madlib += text[n] + " "
+    original += text[n] + " "
+
+print (original)
+print (madlib)
 
 print("\n\nEND*******")

@@ -12,6 +12,9 @@
 
 import nltk
 from nltk.book import *
+from nltk.tag import pos_tag, map_tag
+import random
+
 
 text = text2[:150]
 
@@ -27,23 +30,38 @@ number = input("Please enter a number: ")
 
 madlib = ''
 original = ''
-for n in range(150):
-    tag = nltk.pos_tag(text[n])
-    print (tag)
-    if tag[0][1] == 'NN':
-        madlib += noun + " "
-    elif tag[0][1] == 'VB':
-        madlib += verb + " "
-    elif tag[0][1] == 'JJ':
-        madlib += adjective + " "
-    elif tag[0][1] == 'RB':
-        madlib += adverb + " "
-    elif tag[0][1] == 'NCD':
-        madlib += number + " "
+tag = pos_tag(text)
+tag = [(word, map_tag('en-ptb', 'universal', tag)) for word, tag in tag]
+for pair in tag:
+    id = pair[1]
+    if id == ('NOUN'):
+        if (random.random() < .15):
+            madlib += noun + " "
+        else:
+            madlib += pair[0] + " "
+    elif id == ('VERB'):
+        if (random.random() < .1):
+            madlib += verb + " "
+        else:
+            madlib += pair[0] + " "
+    elif id == ('ADJ'):
+        if (random.random() < .1):
+            madlib += adjective + " "
+        else:
+            madlib += pair[0] + " "
+    elif id == ('ADV'):
+        if (random.random() < .1):
+            madlib += adverb + " "
+        else:
+            madlib += pair[0] + " "
+    elif id == ('NUM'):
+        if (random.random() < .1):
+            madlib += number + " "
+        else:
+            madlib += pair[0] + " "
     else:
-        madlib += text[n] + " "
-    original += text[n] + " "
-
+        madlib += pair[0] + " "
+    original += pair[0] + " "
 print (original)
 print (madlib)
 

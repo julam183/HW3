@@ -7,10 +7,22 @@
 
 # Be prepared to change the search term during demo.
 
-access_token = "791422914583298050-m0XgfqVnPO7hJSH2Oe37nuNQxLNnu6X"
-access_token_secret = "8dpUtkGfsRJNdeUl3Ya140EPWYx8tG7mzbArAlD7TIPED"
-consumer_key = "mHkUkEadhj0vb6lJoNRUNem2A"
-consumer_secret = "LIoMZWcPvOtx2E8mrX36ZxlaNWDvTuLyPJZn2MYPlv70wekd7Z"
+import tweepy
+import requests
+
+def get_api(cfg):
+    auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
+    auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
+    return tweepy.API(auth)
+
+cfg = {
+        "consumer_key" : "mHkUkEadhj0vb6lJoNRUNem2A",
+        "consumer_secret" : "LIoMZWcPvOtx2E8mrX36ZxlaNWDvTuLyPJZn2MYPlv70wekd7Z",
+        "access_token" : "791422914583298050-m0XgfqVnPO7hJSH2Oe37nuNQxLNnu6X",
+        "access_token_secret" : "8dpUtkGfsRJNdeUl3Ya140EPWYx8tG7mzbArAlD7TIPED"
+    }
+
+api = get_api(cfg)
 
 print("Average subjectivity is")
 print("Average polarity is")

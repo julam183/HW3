@@ -9,6 +9,8 @@
 
 import tweepy
 import requests
+import nltk
+from textblob import TextBlob
 
 def get_api(cfg):
     auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
@@ -23,6 +25,20 @@ cfg = {
     }
 
 api = get_api(cfg)
+avgSub = 0.0
+avgPol = 0.0
+count = 0
+term = input("Please enter search term: ")
+results = api.search(q = term)
 
-print("Average subjectivity is")
-print("Average polarity is")
+for tweet in results:
+    print(tweet)
+    avgSub += tweet.subjectivity
+    avgPol += tweet.polarity
+    count += 1
+
+avgSub = avgSub/count
+avgPol = avgPol/count
+
+print("Average subjectivity is " + str(avgSub))
+print("Average polarity is " + str(avgPol))

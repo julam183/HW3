@@ -21,9 +21,9 @@ def tweet(image, message):
     }
 
     api = get_api(cfg)
-    img = ''
-    requests = requests.get(image, stream = True)
-    if requests.status_code == 200:
+    img = 'temp.jpg'
+    request = requests.get(image, stream = True)
+    if request.status_code == 200:
         with open(img, 'wb') as image:
             for chunk in request:
                 image.write(chunk)
@@ -31,5 +31,5 @@ def tweet(image, message):
     print("success")
 
 url = "https://s-media-cache-ak0.pinimg.com/564x/3c/d2/a8/3cd2a844037b921028481f9f3f82d21f.jpg"
-message = "#UMSI-206 #Proj3"
-tweet(image, message)
+message = "#UMSI-206 #Proj3 #UMSI206"
+tweet(url, message)

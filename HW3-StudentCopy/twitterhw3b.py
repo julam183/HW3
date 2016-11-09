@@ -32,9 +32,9 @@ term = input("Please enter search term: ")
 results = api.search(q = term)
 
 for tweet in results:
-    print(tweet)
-    avgSub += tweet.subjectivity
-    avgPol += tweet.polarity
+    print(tweet.text)
+    avgSub = TextBlob(tweet.text).sentiment.subjectivity
+    avgPol += TextBlob(tweet.text).sentiment.polarity
     count += 1
 
 avgSub = avgSub/count
